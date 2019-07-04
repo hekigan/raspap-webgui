@@ -4,7 +4,7 @@ raspap_user="www-data"
 version=`sed 's/\..*//' /etc/debian_version`
 
 # Determine Raspbian version and set default home location for lighttpd 
-webroot_dir="/var/www/html" 
+webroot_dir="/var/raspap/html" 
 if [ $version -eq 10 ]; then
     version_msg="Raspbian 10.0 (Buster)"
     php_package="php7.1-cgi"

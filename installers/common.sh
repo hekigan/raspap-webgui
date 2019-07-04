@@ -1,12 +1,12 @@
 #!/bin/bash
 #
 # RaspAP installation functions.
-# author: @billz
+# author: @hekigan
 # license: GNU General Public License v3.0
 
 raspap_dir="/etc/raspap"
 raspap_user="www-data"
-webroot_dir="/var/www/html"
+webroot_dir="/var/raspap/html"
 version=`sed 's/\..*//' /etc/debian_version`
 
 # Determine Raspbian version, set default home location for lighttpd and 
@@ -147,7 +147,7 @@ function download_latest_files() {
     fi
 
     install_log "Cloning latest files from github"
-    git clone --depth 1 https://github.com/billz/raspap-webgui /tmp/raspap-webgui || install_error "Unable to download files from github"
+    git clone --depth 1 https://github.com/hekigan/raspap-webgui /tmp/raspap-webgui || install_error "Unable to download files from github"
     sudo mv /tmp/raspap-webgui $webroot_dir || install_error "Unable to move raspap-webgui to web root"
 
     # Move icons to webroot

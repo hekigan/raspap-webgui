@@ -2,6 +2,7 @@
 
 define('RASPI_VERSION', '1.5.1');
 define('RASPI_CONFIG', '/etc/raspap');
+define('RASPI_FOLDER', '/var/raspap/html');
 define('RASPI_CONFIG_NETWORKING', RASPI_CONFIG.'/networking');
 define('RASPI_ADMIN_DETAILS', RASPI_CONFIG.'/raspap.auth');
 define('RASPI_WIFI_CLIENT_INTERFACE', 'wlan0');
