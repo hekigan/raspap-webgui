@@ -269,6 +269,7 @@ function patch_system_files() {
         "/sbin/wpa_cli -i wlan[0-9] scan"
         "/sbin/wpa_cli -i wlan[0-9] reconfigure"
         "/sbin/wpa_cli -i wlan[0-9] select_network"
+        "/sbin/wpa_cli -i wlan[0-9] list_networks"
         "/bin/cp /tmp/hostapddata /etc/hostapd/hostapd.conf"
         "/etc/init.d/hostapd start"
         "/etc/init.d/hostapd stop"
