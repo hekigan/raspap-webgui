@@ -27,6 +27,7 @@ $output = $return = 0;
     $status = new StatusMessages();
     $networks = array();
 
+<<<<<<< HEAD
     // Get configured networks and get currently connected
     $list_networks = [];
     // echo('sudo wpa_cli -i ' . RASPI_WIFI_CLIENT_INTERFACE . ' list_networks ');
@@ -39,6 +40,8 @@ $output = $return = 0;
     }
     // var_dump($configured_networks); // lolo
 
+=======
+>>>>>>> 2eb5409c27047c497ff4a1c9482f48b6c52de4ca
     // Find currently configured networks
     exec(' sudo cat ' . RASPI_WPA_SUPPLICANT_CONFIG, $known_return);
 
@@ -91,7 +94,6 @@ $output = $return = 0;
             }
         }
     }
-
 
     if (isset($_POST['connect'])) {
         // echo 'sudo /sbin/wpa_cli -i ' . RASPI_WIFI_CLIENT_INTERFACE . ' select_network '.strval($_POST['connect']);
@@ -149,8 +151,13 @@ $output = $return = 0;
                             }
                         }
                     } else {
+<<<<<<< HEAD
                         // echo $network['passphrase'];
                         // echo strlen($network['passphrase']);
+=======
+                        echo $network['passphrase'];
+                        echo strlen($network['passphrase']);
+>>>>>>> 2eb5409c27047c497ff4a1c9482f48b6c52de4ca
                         $status->addMessage('WPA passphrase must be between 8 and 63 characters ' , 'danger');
                         $ok = false;
                     }
@@ -182,7 +189,10 @@ $output = $return = 0;
 
     array_shift($scan_return);
 
+<<<<<<< HEAD
     $i = 0;
+=======
+>>>>>>> 2eb5409c27047c497ff4a1c9482f48b6c52de4ca
     // display output
     foreach ($scan_return as $network) {
         $arrNetwork = preg_split("/[\t]+/", $network);  // split result into array
@@ -201,7 +211,10 @@ $output = $return = 0;
             if (array_key_exists(4, $arrNetwork) && array_key_exists($arrNetwork[4], $networks)) {
                 $networks[$arrNetwork[4]]['visible'] = true;
                 $networks[$arrNetwork[4]]['channel'] = ConvertToChannel($arrNetwork[1]);
+<<<<<<< HEAD
                 $networks[$arrNetwork[4]]['network-id'] = $i++;
+=======
+>>>>>>> 2eb5409c27047c497ff4a1c9482f48b6c52de4ca
                 // TODO What if the security has changed?
             } else {
                 $networks[$arrNetwork[4]] = array(
@@ -228,6 +241,7 @@ $output = $return = 0;
             $networks[$iwconfig_ssid[1]]['connected'] = true;
         }
     }
+<<<<<<< HEAD
 
     $index = 0;
     foreach ($networks as $ssid => $network) {
@@ -238,3 +252,5 @@ $output = $return = 0;
         }
         $index++;
     } 
+=======
+>>>>>>> 2eb5409c27047c497ff4a1c9482f48b6c52de4ca
