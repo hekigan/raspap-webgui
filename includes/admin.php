@@ -1,6 +1,6 @@
 <?php
 
-include_once('includes/status_messages.php');
+include_once('/var/raspap/html/includes/status_messages.php');
 
 function DisplayAuthConfig($username, $password)
 {

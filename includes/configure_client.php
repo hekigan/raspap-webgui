@@ -19,14 +19,25 @@ function DisplayWPAConfig()
         if (preg_match('/network\s*=/', $line)) {
             $network = array('visible' => false, 'configured' => true, 'connected' => false);
         } elseif ($network !== null) {
+
+            // get pair key/value of "wpa_supplicant.conf"
+            preg_match('/^\s([^=]*)=(.*)$/', $line, $lineArr);
+            $conf_key = null;
+            $conf_value = null;
+
+            if (count($lineArr) > 0) {
+                $conf_key = $lineArr[1];
+                $conf_value = $lineArr[2];
+            }
+            
             if (preg_match('/^\s*}\s*$/', $line)) {
                 $networks[$ssid] = $network;
                 $network = null;
                 $ssid = null;
-            } elseif ($lineArr = preg_split('/\s*=\s*/', trim($line))) {
-                switch (strtolower($lineArr[0])) {
+            } elseif ($conf_key) {
+                switch (strtolower($conf_key)) {
                     case 'ssid':
-                        $ssid = trim($lineArr[1], '"');
+                        $ssid = trim($conf_value, '"');
                         break;
                     case 'psk':
                         if (array_key_exists('passphrase', $network)) {
@@ -35,20 +46,21 @@ function DisplayWPAConfig()
                     case '#psk':
                         $network['protocol'] = 'WPA';
                     case 'wep_key0': // Untested
-                        $network['passphrase'] = trim($lineArr[1], '"');
+                        $network['passphrase'] = trim($conf_value, '"');
                         break;
                     case 'key_mgmt':
-                        if (! array_key_exists('passphrase', $network) && $lineArr[1] === 'NONE') {
+                        if (! array_key_exists('passphrase', $network) && $conf_value === 'NONE') {
                             $network['protocol'] = 'Open';
                         }
                         break;
                     case 'priority':
-                        $network['priority'] = trim($lineArr[1], '"');
+                        $network['priority'] = trim($conf_value, '"');
                         break;
                 }
             }
         }
     }
+    // exit(0); // exit for tests
 
     if (isset($_POST['connect'])) {
         $result = 0;
@@ -102,7 +114,7 @@ function DisplayWPAConfig()
                             }
                         }
                     } else {
-                        $status->addMessage('WPA passphrase must be between 8 and 63 characters', 'danger');
+                        $status->addMessage('WPA passphrase must be between 8 and 63 characters (' . strlen($network['passphrase']) . ') | ' . $network['passphrase'], 'danger');
                         $ok = false;
                     }
                 }
