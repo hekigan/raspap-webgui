@@ -4,7 +4,7 @@ import router from './router'
 import store from './store'
 import axios from 'axios';
 
-Vue.prototype.$http = axios.create({ baseURL: `//${window.location.hostname}:3000/api.php` });
+Vue.prototype.$http = axios.create({ baseURL: `//${window.location.hostname}/api.php` });
 
 Vue.config.productionTip = false
 

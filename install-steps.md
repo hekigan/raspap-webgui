@@ -13,8 +13,8 @@ and then symlink in:
 
 ```
 server {
-        listen   3000;
-        listen   [::]:3000;
+        listen   80;
+        listen   [::]:80;
 
         root /var/raspap/html;
         index index.php index.html index.htm;
